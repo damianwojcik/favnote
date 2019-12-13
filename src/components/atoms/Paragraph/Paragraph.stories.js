@@ -1,9 +1,7 @@
 import React from 'react';
+import { storiesOf } from '@storybook/react';
 import Paragraph from './Paragraph';
 
-export default {
-  component: Paragraph,
-  title: 'Paragraph',
-};
-
-export const normal = () => <Paragraph>Hello Damian</Paragraph>;
+storiesOf('Atoms/Paragraph', module).add('Normal', () => (
+  <Paragraph>Hello Damian</Paragraph>
+));
