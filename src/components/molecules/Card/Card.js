@@ -8,10 +8,11 @@ import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
 import { connect } from 'react-redux';
 import { removeItem as removeItemAction } from 'actions';
+import withContext from 'hoc/withContext';
 
 const StyledWrapper = styled.div`
   min-height: 380px;
-  box-shadow: 0 10px 30px -5px hsla(0, 0%, 0%, 0.1);
+  box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
   border-radius: 10px;
   overflow: hidden;
   position: relative;
@@ -24,9 +25,11 @@ const InnerWrapper = styled.div`
   padding: 17px 30px;
   background-color: ${({ activeColor, theme }) =>
     activeColor ? theme[activeColor] : 'white'};
+
   :first-of-type {
-    z-index: 99;
+    z-index: 9999;
   }
+
   ${({ flex }) =>
     flex &&
     css`
@@ -37,23 +40,23 @@ const InnerWrapper = styled.div`
 `;
 
 const DateInfo = styled(Paragraph)`
-  margin: 0 0 10px;
+  margin: 0 0 5px;
   font-weight: ${({ theme }) => theme.bold};
   font-size: ${({ theme }) => theme.fontSize.xs};
 `;
 
 const StyledHeading = styled(Heading)`
-  margin: 10px 0 0;
+  margin: 5px 0 0;
 `;
 
 const StyledAvatar = styled.img`
   width: 86px;
   height: 86px;
   border: 5px solid ${({ theme }) => theme.twitters};
+  border-radius: 50px;
   position: absolute;
   right: 25px;
   top: 25px;
-  border-radius: 50px;
 `;
 
 const StyledLinkButton = styled.a`
@@ -80,7 +83,7 @@ class Card extends Component {
   render() {
     const {
       id,
-      cardType,
+      pageContext,
       title,
       created,
       twitterName,
@@ -88,27 +91,25 @@ class Card extends Component {
       content,
       removeItem,
     } = this.props;
-
     const { redirect } = this.state;
 
     if (redirect) {
-      return <Redirect to={`${cardType}/details/${id}`} />;
+      return <Redirect to={`${pageContext}/details/${id}`} />;
     }
-
     return (
-      <StyledWrapper onClick={this.handleCardClick}>
-        <InnerWrapper activeColor={cardType}>
+      <StyledWrapper>
+        <InnerWrapper onClick={this.handleCardClick} activeColor={pageContext}>
           <StyledHeading>{title}</StyledHeading>
           <DateInfo>{created}</DateInfo>
-          {cardType === 'twitters' && (
+          {pageContext === 'twitters' && (
             <StyledAvatar src={`https://avatars.io/twitter/${twitterName}`} />
           )}
-          {cardType === 'articles' && <StyledLinkButton href={articleUrl} />}
+          {pageContext === 'articles' && <StyledLinkButton href={articleUrl} />}
         </InnerWrapper>
         <InnerWrapper flex>
           <Paragraph>{content}</Paragraph>
-          <Button onClick={() => removeItem(cardType, id)} secondary>
-            Remove
+          <Button onClick={() => removeItem(pageContext, id)} secondary>
+            REMOVE
           </Button>
         </InnerWrapper>
       </StyledWrapper>
@@ -118,7 +119,7 @@ class Card extends Component {
 
 Card.propTypes = {
   id: PropTypes.number.isRequired,
-  cardType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
+  pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
   title: PropTypes.string.isRequired,
   created: PropTypes.string.isRequired,
   twitterName: PropTypes.string,
@@ -128,7 +129,7 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
-  cardType: 'notes',
+  pageContext: 'notes',
   twitterName: null,
   articleUrl: null,
 };
@@ -137,4 +138,4 @@ const mapDispatchToProps = dispatch => ({
   removeItem: (itemType, id) => dispatch(removeItemAction(itemType, id)),
 });
 
-export default connect(null, mapDispatchToProps)(Card);
+export default connect(null, mapDispatchToProps)(withContext(Card));
