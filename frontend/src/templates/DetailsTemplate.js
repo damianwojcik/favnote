@@ -56,7 +56,6 @@ const StyledImage = styled.img`
 const DetailsTemplate = ({
   pageContext,
   title,
-  created,
   content,
   articleUrl,
   twitterName,
@@ -67,7 +66,6 @@ const DetailsTemplate = ({
         <StyledHeading big as="h1">
           {title}
         </StyledHeading>
-        <StyledParagraph>{created}</StyledParagraph>
       </StyledPageHeader>
       <Paragraph>{content}</Paragraph>
       {pageContext === 'articles' && (
