@@ -85,7 +85,6 @@ class Card extends Component {
       id,
       pageContext,
       title,
-      created,
       twitterName,
       articleUrl,
       content,
@@ -96,11 +95,11 @@ class Card extends Component {
     if (redirect) {
       return <Redirect to={`${pageContext}/details/${id}`} />;
     }
+
     return (
-      <StyledWrapper>
-        <InnerWrapper onClick={this.handleCardClick} activeColor={pageContext}>
+      <StyledWrapper onClick={this.handleCardClick}>
+        <InnerWrapper activeColor={pageContext}>
           <StyledHeading>{title}</StyledHeading>
-          <DateInfo>{created}</DateInfo>
           {pageContext === 'twitters' && (
             <StyledAvatar src={`https://avatars.io/twitter/${twitterName}`} />
           )}
@@ -118,10 +117,9 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
   title: PropTypes.string.isRequired,
-  created: PropTypes.string.isRequired,
   twitterName: PropTypes.string,
   articleUrl: PropTypes.string,
   content: PropTypes.string.isRequired,
