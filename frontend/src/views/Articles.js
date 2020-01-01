@@ -23,11 +23,10 @@ Articles.propTypes = {
   articles: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      cardType: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
-      articleUrl: PropTypes.string.isRequired,
       created: PropTypes.string.isRequired,
+      articleUrl: PropTypes.string.isRequired,
     }),
   ),
 };
