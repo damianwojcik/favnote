@@ -1,15 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 import AuthTemplate from 'templates/AuthTemplate';
 import Heading from 'components/atoms/Heading/Heading';
 import Input from 'components/atoms/Input/Input';
 import Button from 'components/atoms/Button/Button';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { routes } from 'routes';
 import { connect } from 'react-redux';
 import { authenticate as authenticateAction } from 'actions';
-import { Redirect } from 'react-router-dom';
+
+const StyledSmall = styled.small`
+  display: block;
+  margin-bottom: 10px;
+`;
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -48,6 +53,7 @@ const LoginPage = ({ userID, authenticate }) => (
         return (
           <>
             <Heading>Sign in</Heading>
+            <StyledSmall>Demo: myuser / password123</StyledSmall>
             <StyledForm>
               <StyledInput
                 type="text"
@@ -76,6 +82,11 @@ const LoginPage = ({ userID, authenticate }) => (
     </Formik>
   </AuthTemplate>
 );
+
+LoginPage.propTypes = {
+  userID: PropTypes.string.isRequired,
+  authenticate: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = ({ userID = null }) => ({
   userID,

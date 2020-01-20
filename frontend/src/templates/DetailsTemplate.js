@@ -30,11 +30,6 @@ const StyledHeading = styled(Heading)`
   }
 `;
 
-const StyledParagraph = styled(Paragraph)`
-  margin: 0;
-  font-weight: ${({ theme }) => theme.bold};
-`;
-
 const StyledLink = styled.a`
   display: block;
   font-weight: ${({ theme }) => theme.bold};
@@ -87,7 +82,6 @@ const DetailsTemplate = ({
 DetailsTemplate.propTypes = {
   pageContext: PropTypes.oneOf(['notes', 'articles', 'twitters']).isRequired,
   title: PropTypes.string,
-  created: PropTypes.string,
   content: PropTypes.string,
   articleUrl: PropTypes.string,
   twitterName: PropTypes.string,
@@ -95,7 +89,6 @@ DetailsTemplate.propTypes = {
 
 DetailsTemplate.defaultProps = {
   title: '',
-  created: '',
   content: '',
   articleUrl: '',
   twitterName: '',

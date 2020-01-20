@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Heading from 'components/atoms/Heading/Heading';
 import logoImg from 'assets/icons/logo.svg';
@@ -37,5 +38,16 @@ const AuthTemplate = ({ children }) => (
     <StyledAuthCard>{children}</StyledAuthCard>
   </StyledWrapper>
 );
+
+AuthTemplate.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+};
+
+AuthTemplate.defaultProps = {
+  children: [],
+};
 
 export default AuthTemplate;

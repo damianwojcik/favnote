@@ -16,7 +16,7 @@ class Twitters extends Component {
 
     return (
       <GridTemplate>
-        {twitters.map(({ title, content, twitterName, created, _id: id }) => (
+        {twitters.map(({ title, content, twitterName, _id: id }) => (
           <Card
             id={id}
             title={title}
@@ -39,6 +39,7 @@ Twitters.propTypes = {
       twitterName: PropTypes.string.isRequired,
     }),
   ),
+  fetchTwitters: PropTypes.func.isRequired,
 };
 
 Twitters.defaultProps = {

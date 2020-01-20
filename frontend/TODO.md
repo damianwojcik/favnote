@@ -1,0 +1,3 @@
+- check all api routes
+- add <Spinner /> when state.isLoading
+- fix details page

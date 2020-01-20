@@ -38,7 +38,7 @@ export const fetchItems = itemType => (dispatch, getState) => {
   dispatch({ type: FETCH_REQUEST });
 
   return axios
-    .get('http://localhost:9000/api/notes/type', {
+    .get('http://localhost:9000/api/notes/', {
       params: {
         type: itemType,
         userID: getState().userID,

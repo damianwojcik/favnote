@@ -7,28 +7,28 @@ const NoteSchema = new Schema({
   type: {
     type: String,
     enum: NOTE_TYPES,
-    required: true,
+    required: true
   },
   title: {
     type: String,
-    required: true,
+    required: true
   },
   content: {
     type: String,
-    required: true,
+    required: true
   },
   articleUrl: {
     type: String,
-    defualt: null,
+    defualt: null
   },
   twitterName: {
     type: String,
-    default: null,
+    default: null
   },
   userID: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 });
 
 mongoose.model('notes', NoteSchema);
